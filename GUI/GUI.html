@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stem Playaaa</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+  </head>
+  <body>
+    <div id="HTML_playmusic" style="border:1px black solid;border-radius:0.2em">PLAY</div>
+    <div id="output"></div>
+  </body>
+  <script>
+    /*
+
+    */
+
+function playMusic() {
+  ws.send("play")
+}
+
+HTML_playmusic.addEventListener( "click" , playMusic )
+
+let ws
+
+function connect() {
+	ws = new WebSocket("ws://localhost:8080/echo")
+	ws.onopen = function () {
+		ws.send("Hello World from client")
+	}
+
+	ws.onmessage = function (event) {
+		var received_msg = event.data
+	}
+	ws.onclose = function () {
+		alert("Connection is closed...")
+	}
+}
+connect( )
+    </script>
+</html>
